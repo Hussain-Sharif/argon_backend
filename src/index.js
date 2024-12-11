@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename); // we get the folder url for this cu
 
 const dbPath = path.join(__dirname, 'db/argonDb.db'); // assigned here buddy!
 let db=null
-let port=process.env.PORT || 8000
+let port=process.env.PORT || 3000
 
 
 const initializeDBAndServer = async () => {
@@ -35,6 +35,7 @@ const initializeDBAndServer = async () => {
 initializeDBAndServer();
 
 export {db}
+
 
 // The command to Run the index.js is npm start where the start keyword is being configured as nodemon src/index.js go and check package.json
 
