@@ -12,11 +12,12 @@ dotenv.config()  // .env config
 const __filename = fileURLToPath(import.meta.url);  // due to using ES module we get the url for this current file
 const __dirname = path.dirname(__filename); // we get the folder url for this current file
 
-const dbPath = path.join(__dirname, 'db/argonDb.db'); // assigned here buddy!
+const dbPath = path.join(__dirname, 'argonDb.db'); // assigned here buddy!
+console.log(dbPath)
 let db=null
-let port=process.env.PORT || 3000
+let port=process.env.PORT || 7000
 
-
+// C:\Users\hp\OneDrive\Desktop\Sharif_notes_files\argon_backend\src\db\argonDB.db
 const initializeDBAndServer = async () => {
     try {
         db = await open({
