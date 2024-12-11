@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "f47a6eb2-3b32-4556-ae21-82ef7e06d2b0",
+		"name": "argon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32413422"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"sharif@gmail.com\",\r\n    \"password\":\"Sharif@00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/user/user-login/",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"user",
+								"user-login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"sharif@gmail.com\",\r\n    \"password\":\"Sharif@00\",\r\n    \"username\":\"sharif00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/user/user-register/",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"user",
+								"user-register",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Technician",
+			"item": [
+				{
+					"name": "Technician Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "koushik@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Koushik Pumbling and Gas Services",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Hannu@00",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Master plumber and home maintenance expert. Known for precise work, attention to detail, and comprehensive problem-solving skills across residential and commercial projects.",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/hp/OneDrive/Desktop/Sharif_notes_files/internwork_assignments/gas_stove.jpeg"
+								},
+								{
+									"key": "city",
+									"value": "[8]",
+									"type": "text"
+								},
+								{
+									"key": "areas",
+									"value": "[7]",
+									"type": "text"
+								},
+								{
+									"key": "services",
+									"value": "[3]",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "7393600912",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Server}}/technician/technician-register",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"technician",
+								"technician-register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Technician Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"hannu@gmail.com\",\r\n    \"password\":\"Hannu@00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/technician/technician-login/",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"technician",
+								"technician-login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Featured Technicians Based On Appliance and Location",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"specificCityId\":\"3\",\r\n    \"applianceId\": \"2\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/technician/featured-technicians",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"technician",
+								"featured-technicians"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "locations/Area",
+			"item": [
+				{
+					"name": "All Locations/Areas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/city/all-cities",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"city",
+								"all-cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chosen Specific  City Areas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"specificCityId\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/city/chosen-city-area",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"city",
+								"chosen-city-area"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appliance Types/Services/",
+			"item": [
+				{
+					"name": "appliance-suggestions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"searchedAppliance\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/appliance/appliance-suggestions",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"appliance",
+								"appliance-suggestions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
