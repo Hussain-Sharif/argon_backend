@@ -4,11 +4,11 @@ import { db } from '../index.js';
 import {AppError} from '../utils/ApiError.js'
 import {ApiResponse} from '../utils/ApiResponse.js'
 import { asyncHandler } from '../utils/asyncHandler.js';
-import { validateEmail, validatePassword } from '../utils/validation.js';
+import { validateEmail, validateMobileNumber, validatePassword } from '../utils/validation.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
 export const technicianRegister = asyncHandler(async (req, res) => {
-    const {name,password,email, description}=req.body
+    const {name,password,email, description,mobile}=req.body
     let {city,areas,services}=req.body // ALL ARE ARRAY OF STRINGS
     city = JSON.parse(req.body.city);
     areas = JSON.parse(req.body.areas);
@@ -19,12 +19,13 @@ export const technicianRegister = asyncHandler(async (req, res) => {
     
     // Technician validation
 
-    if(!name && !password && !email && !description && !city && !areas && !services){
+    if(!name || !password || !email || !description || !city || !areas || !services || !mobile){
         throw new AppError(400,"All fields are required")
     }
 
     validateEmail(email);
     validatePassword(password);
+    validateMobileNumber(mobile);
     
    
     // CHECKING==> technician is Existed from DB or not
@@ -44,8 +45,8 @@ export const technicianRegister = asyncHandler(async (req, res) => {
         }
 
         // Inserting the data for normal values
-        const insertQuery=`INSERT INTO technician (name,password,email,description,rating,image) VALUES (?,?,?,?,?,?)`
-        await db.run(insertQuery,[name,hashedPassword,email,description,0,imageUploaded?.url||""])
+        const insertQuery=`INSERT INTO technician (name,password,email,description,rating,image,mobile) VALUES (?,?,?,?,?,?,?)`
+        await db.run(insertQuery,[name,hashedPassword,email,description,0,imageUploaded?.url||"",mobile])
 
         // After Insert int Techinican TABLE. now we Insert the data of Junction TABLES 
         const dbTechnicianrQuery= await db.get(technicianQuery,[email])
@@ -78,18 +79,20 @@ export const technicianLogin =asyncHandler(async (req,res)=>{
 
     validateEmail(email)
     validatePassword(password)
-    const userQuery=`SELECT * FROM user WHERE email="${email}"`
 
-    const dbUserResult=await db.get(userQuery)
+    const userQuery=`SELECT * FROM technician WHERE email=?`
+
+    const dbUserResult=await db.get(userQuery,[email])
     if(dbUserResult===undefined){
-        throw new AppError(400,"User not found")
+        throw new AppError(400,"Business not found")
     }else{
+        console.log(dbUserResult)
         const hashedPassword=dbUserResult.password
         const isPasswordMatch=await compare(password,hashedPassword)
         if(isPasswordMatch){
             const payload={email,password}
             const jwtToken=jwt.sign(payload,process.env.JWT_SECRET_KEY,{expiresIn:"1d"})
-            res.status(200).cookie("jwtToken",jwtToken).json(new ApiResponse(200,"User logged in successfully",{jwtToken,username:dbUserResult["username"]})) // directly storing in cookies of browser or we can get token from response directly
+            res.status(200).cookie("jwtToken",jwtToken).json(new ApiResponse(200,"Business logged in successfully",{jwtToken,username:dbUserResult["username"]})) // directly storing in cookies of browser or we can get token from response directly
         }else{
             throw new AppError(400,"Invalid password")
         }

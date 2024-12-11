@@ -13,7 +13,7 @@ export const userRegister = asyncHandler(async (req, res) => {
     
     // User validation
 
-    if(!username && !password && !email){
+    if(!username || !password || !email){
         throw new AppError(400,"All fields are required")
     }
 
@@ -65,5 +65,4 @@ export const userLogin =asyncHandler(async (req,res)=>{
         }
     }
 })
-
 

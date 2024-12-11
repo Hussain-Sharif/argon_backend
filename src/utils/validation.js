@@ -32,3 +32,10 @@ export const validateUsername=(username)=>{
         throw new AppError(400,"Username must contain only small letters, numbers, and underscores")
     }
 }
+
+export const validateMobileNumber=(mobileNumber)=>{
+    const regex = /^[0-9]{10}$/;
+    if(regex.test(mobileNumber)===false){
+        throw new AppError(400,"Invalid mobile number")
+    }
+}

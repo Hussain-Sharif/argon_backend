@@ -1,0 +1,2 @@
+Here this txt file is created that to mention that this public and tempImages folders need to be involved in git repo 
+This folder's are considered when there is an file in it.

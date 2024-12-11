@@ -6,5 +6,3 @@ export const userRouter=Router();
 
 userRouter.route("/user-register").post(userRegister);
 userRouter.route("/user-login").post(userLogin);
-// userRouter.route("/user-logout").post();
-// userRouter.route("/refresh-token").post();
