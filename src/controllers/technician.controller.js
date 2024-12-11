@@ -100,3 +100,16 @@ export const technicianLogin =asyncHandler(async (req,res)=>{
 })
 
 
+
+
+export const featuredTechnicians=asyncHandler(async (req,res)=>{
+    const {specificCityId,applianceId}=req.body
+    const parsedCityId=JSON.parse(specificCityId)
+    const parsedApplianceId=JSON.parse(applianceId)
+    const technicians=await db.all(`SELECT technician.name,technician.description,technician.mobile,technician.image,technician.rating FROM technician
+INNER JOIN technician_appliance ON technician.id=technician_appliance.technician_id
+INNER JOIN technician_city ON technician.id=technician_city.technician_id
+WHERE technician_city.city_id=? AND technician_appliance.appliance_id=?
+    `, [parsedCityId,parsedApplianceId])
+    res.status(200).json(new ApiResponse(200,"Technicians fetched successfully",technicians))
+})

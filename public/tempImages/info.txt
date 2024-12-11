@@ -1,2 +1,70 @@
 Here this txt file is created that to mention that this public and tempImages folders need to be involved in git repo 
 This folder's are considered when there is an file in it.
+
+
+My SQL Queries of radom data
+
+-- Assuming technician IDs start from 1 and appliance IDs start from 1
+INSERT INTO technician_appliance (technician_id, appliance_id) VALUES 
+(11, 1), (11, 2),  -- Alex Rodriguez specializes in Fridge and Air Conditioner
+(12, 3), (12, 6),  -- Elena Petrova specializes in Gas Stove and Microwave
+(13, 4),  (13,5),(13,6),     -- Marcus Chen specializes in Television
+(14, 5),  (14,4),    -- Sophia Nakamura specializes in Washing Machine
+(15, 6),(15,4);        -- Rafael Santos specializes in Microwave
+
+
+
+-- Technician-City Junction Table with Multiple Cities
+INSERT INTO technician_city (technician_id, city_id) VALUES 
+-- Alex Rodriguez (Multiple Cities)
+(11, 1),  -- Hyderabad
+(11, 2),  -- Bangalore
+(11, 3),  -- Chennai
+
+-- Elena Petrova (Multiple Cities)
+(12, 2),  -- Bangalore
+(12, 4),  -- Delhi
+(12, 5),  -- Mumbai
+
+-- Marcus Chen (Multiple Cities)
+(13, 4),  -- Delhi
+(13, 1),  -- Hyderabad
+(13, 6),  -- Pune
+
+-- Sophia Nakamura (Multiple Cities)
+(14, 5),  -- Mumbai
+(14, 6),  -- Pune
+(14, 7),  -- Kolkata
+
+-- Rafael Santos (Multiple Cities)
+(15, 6),  -- Pune
+(15, 8),  -- Ahmedabad
+(15, 9);  -- Jaipur
+
+
+-- Technician-Area Junction Table
+INSERT INTO technician_area (technician_id, area_id) VALUES 
+-- Alex Rodriguez (Hyderabad areas)
+(11, 1),   -- Hitech City
+(11, 2),   -- Banjara Hills
+(11, 3),   -- Jubilee Hills
+
+-- Elena Petrova (Bangalore areas)
+(12, 7),   -- Koramangala
+(12, 8),   -- Indiranagar
+(12, 9),   -- Whitefield
+
+-- Marcus Chen (Delhi areas)
+(13, 16),  -- Connaught Place
+(13, 17),  -- Nehru Place
+(13, 18),  -- Dwarka
+
+-- Sophia Nakamura (Mumbai areas)
+(14, 25),  -- Bandra
+(14, 26),  -- Juhu
+(14, 27),  -- Andheri
+
+-- Rafael Santos (Pune areas)
+(15, 31),  -- Koregaon Park
+(15, 32),  -- Baner
+(15, 33);  -- Hinjewadi

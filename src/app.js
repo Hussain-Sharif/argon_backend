@@ -15,11 +15,14 @@ app.use(cookieParser());
 //Import Routes...
 import {userRouter} from './routes/user.routes.js';
 import { technicianRouter } from './routes/technician.routes.js';
+import { citiesRouter } from './routes/city.routes.js';
+import { applianceRouter } from './routes/appliance.routes.js';
 
 // Delcaring the Imported Routers
 
 app.use("/api/v1/user",userRouter);
 app.use("/api/v1/technician",technicianRouter);
-
+app.use("/api/v1/city",citiesRouter);
+app.use("/api/v1/appliance",applianceRouter)
 
 export {app}
