@@ -32,6 +32,3 @@ export const validateUsername=(username)=>{
         throw new AppError(400,"Username must contain only small letters, numbers, and underscores")
     }
 }
-
-// validateEmail("sharif@l.comm")
-// validatePassword("sdvsdv@51")

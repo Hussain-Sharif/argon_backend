@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { userLogin, userRegister } from "../controllers/user.controller.js";
 
 
 export const userRouter=Router();
 
-userRouter.route("/user-register").post();
-userRouter.route("/user-login").post();
-userRouter.route("/user-logout").post();
-userRouter.route("/refresh-token").post();
+userRouter.route("/user-register").post(userRegister);
+userRouter.route("/user-login").post(userLogin);
+// userRouter.route("/user-logout").post();
+// userRouter.route("/refresh-token").post();
