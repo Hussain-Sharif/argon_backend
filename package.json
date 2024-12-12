@@ -38,5 +38,8 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
-  }
+  },
+  "files": [
+    "src/db/argonDB.db"
+  ]
 }
