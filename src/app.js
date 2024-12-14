@@ -11,8 +11,19 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use((err, req, res, next) => {
-    console.error("Error caught in middleware:", err.message);
-    next(err);
+    // Ensure error is always sent as JSON
+    if (err instanceof AppError) {
+        res.status(err.statusCode).json({
+            success: err.success,
+            message: err.message,
+            data: err.data || null,
+        });
+    } else {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
 });
 
 
