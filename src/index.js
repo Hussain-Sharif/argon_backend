@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import {open} from 'sqlite';
 import sqlite3 from 'sqlite3';
 import path from 'path'
+import fs from 'fs'
 import { fileURLToPath } from 'url';
 
 
@@ -18,6 +19,12 @@ console.log("dbPath: ",dbPath)
 let db=null
 let port=process.env.PORT || 7000
 
+if (!fs.existsSync(dbPath)) {
+    console.error("Database file not found at:", dbPath);
+  } else {
+    console.log("Database file located successfully.");
+  }
+
 const initializeDBAndServer = async () => {
     try {
         db = await open({
@@ -25,6 +32,11 @@ const initializeDBAndServer = async () => {
             driver: sqlite3.Database,
         });
         console.log('Database connection established');
+        
+        // Debug: Verify Tables
+        const tables = await db.all("SELECT name FROM sqlite_master WHERE type='table';");
+        console.log("Tables in the database:", tables);
+
         app.listen(port, () => {
             console.log(`Server Running at http://localhost:${port}/`);
         });
