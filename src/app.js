@@ -10,6 +10,11 @@ app.use(cors({
     origin:process.env.CORS_ORIGIN,
 }));
 app.use(cookieParser());
+app.use((err, req, res, next) => {
+    console.error("Error caught in middleware:", err.message);
+    next(err);
+});
+
 
 
 //Import Routes...
