@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);  // due to using ES module we
 const __dirname = path.dirname(__filename); // we get the folder url for this current file
 
 console.log("__dirname: ",__dirname)
-const dbPath = path.join(__dirname, 'argonDb.db'); // assigned here buddy!
+const dbPath = path.join(__dirname, 'argonDB.db'); // assigned here buddy!
 console.log("dbPath: ",dbPath)
 let db=null
 let port=process.env.PORT || 7000
