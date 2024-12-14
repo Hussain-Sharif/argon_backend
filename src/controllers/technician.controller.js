@@ -1,7 +1,7 @@
 import { compare, hash } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { db } from '../index.js';
-import {AppError} from '../utils/ApiError.js'
+import {ApiError} from '../utils/ApiError.js'
 import {ApiResponse} from '../utils/ApiResponse.js'
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { validateEmail, validateMobileNumber, validatePassword } from '../utils/validation.js';
@@ -20,12 +20,12 @@ export const technicianRegister = asyncHandler(async (req, res) => {
     // Technician validation
 
     if(!name || !password || !email || !description || !city || !areas || !services || !mobile){
-        throw new AppError(400,"All fields are required")
+        res.status(400).json(new ApiError(400,"All fields are required"))
     }
 
-    validateEmail(email);
-    validatePassword(password);
-    validateMobileNumber(mobile);
+    validateEmail(email,res);
+    validatePassword(password,res);
+    validateMobileNumber(mobile,res);
     
    
     // CHECKING==> technician is Existed from DB or not
@@ -41,7 +41,7 @@ export const technicianRegister = asyncHandler(async (req, res) => {
         const imageUploaded=await uploadOnCloudinary(imageLocalPath)
 
         if(!imageUploaded){
-            throw new AppError(400,"Image is required")
+            res.status(400).json(new ApiError(400,"Image is required"))
         }
 
         // Inserting the data for normal values
@@ -67,24 +67,24 @@ export const technicianRegister = asyncHandler(async (req, res) => {
 
         res.status(200).json(new ApiResponse(200,"Name with this business is registered successfully",dbTechnicianCheck))
     }else{
-        throw new AppError(400,"Name with this business already exists")
+        res.status(400).json(new ApiError(400,"Name with this business already exists"))
     }
 });
 
 export const technicianLogin =asyncHandler(async (req,res)=>{
     const {email,password}=req.body
     if(!email || !password){
-        throw new AppError(400,"Email and password are required")
+        res.status(400).json(new ApiError(400,"Email and password are required"))
     } 
 
-    validateEmail(email)
-    validatePassword(password)
+    validateEmail(email,res)
+    validatePassword(password,res)
 
     const userQuery=`SELECT * FROM technician WHERE email=?`
 
     const dbUserResult=await db.get(userQuery,[email])
     if(dbUserResult===undefined){
-        throw new AppError(400,"Business not found")
+        res.status(400).json(new ApiError(400,"Business not found"))
     }else{
         console.log(dbUserResult)
         const hashedPassword=dbUserResult.password
@@ -94,7 +94,7 @@ export const technicianLogin =asyncHandler(async (req,res)=>{
             const jwtToken=jwt.sign(payload,process.env.JWT_SECRET_KEY,{expiresIn:"1d"})
             res.status(200).cookie("jwtToken",jwtToken).json(new ApiResponse(200,"Business logged in successfully",{jwtToken,username:dbUserResult["username"]})) // directly storing in cookies of browser or we can get token from response directly
         }else{
-            throw new AppError(400,"Invalid password")
+            res.status(400).json(new ApiError(400,"Invalid password"))
         }
     }
 })

@@ -1,6 +1,5 @@
-class AppError extends Error {
+class ApiError  {
     constructor(statusCode, message="Something went wrong in ApiError.js") {
-        super(message);
         this.statusCode = statusCode;
         this.message = message;
         this.data = null;
@@ -8,4 +7,4 @@ class AppError extends Error {
     }
 }
 
-export {AppError}
+export {ApiError}

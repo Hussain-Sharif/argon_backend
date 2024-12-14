@@ -10,21 +10,7 @@ app.use(cors({
     origin:process.env.CORS_ORIGIN,
 }));
 app.use(cookieParser());
-app.use((err, req, res, next) => {
-    // Ensure error is always sent as JSON
-    if (err instanceof AppError) {
-        res.status(err.statusCode).json({
-            success: err.success,
-            message: err.message,
-            data: err.data || null,
-        });
-    } else {
-        res.status(500).json({
-            success: false,
-            message: "Internal Server Error",
-        });
-    }
-});
+
 
 
 
