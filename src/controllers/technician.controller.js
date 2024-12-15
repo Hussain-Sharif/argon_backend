@@ -12,9 +12,9 @@ export const technicianRegister = asyncHandler(async (req, res) => {
     let { city, areas, services } = req.body;
     console.log("In server", { city, areas, services });
 
-    city = city && city !== "" ? JSON.parse(city) : [];
-    areas = areas && areas !== "" ? JSON.parse(areas) : [];
-    services = services && services !== "" ? JSON.parse(services) : [];
+    // city = city && city !== "" ? JSON.parse(city) : [];
+    // areas = areas && areas !== "" ? JSON.parse(areas) : [];
+    // services = services && services !== "" ? JSON.parse(services) : [];
 
     console.log(req.file);
     const imageLocalPath= req.file?.path
