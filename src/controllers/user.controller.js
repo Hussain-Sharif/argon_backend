@@ -59,7 +59,7 @@ export const userLogin =asyncHandler(async (req,res)=>{
         if(isPasswordMatch){
             const payload={email,password}
             const jwtToken=jwt.sign(payload,process.env.JWT_SECRET_KEY,{expiresIn:"1d"})
-            res.status(200).cookie("jwtToken",jwtToken).json(new ApiResponse(200,"User logged in successfully",{jwtToken,username:dbUserResult["username"],type:"user"})) // directly storing in cookies of browser or we can get token from response directly
+            res.status(200).cookie("jwtToken",jwtToken).json(new ApiResponse(200,"User logged in successfully",{jwtToken,username:dbUserResult["username"],type:"user",email:dbUserResult["email"]})) // directly storing in cookies of browser or we can get token from response directly
         }else{
            return res.status(400).json(new ApiError(400,"Invalid password"))
         }
