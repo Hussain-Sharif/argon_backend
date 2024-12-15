@@ -10,7 +10,7 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 export const technicianRegister = asyncHandler(async (req, res) => {
     const {name,password,email, description,mobile}=req.body
     let { city, areas, services } = req.body;
-    console.log("In server", { city, areas, services });
+    console.log("In server",  req.body );
 
     // city = city && city !== "" ? JSON.parse(city) : [];
     // areas = areas && areas !== "" ? JSON.parse(areas) : [];
