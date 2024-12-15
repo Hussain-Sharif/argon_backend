@@ -41,7 +41,7 @@ export const technicianRegister = asyncHandler(async (req, res) => {
         const imageUploaded=await uploadOnCloudinary(imageLocalPath)
 
         if(!imageUploaded){
-            res.status(400).json(new ApiError(400,"Image is required"))
+           return res.status(400).json(new ApiError(400,"Image is required"))
         }
 
         // Inserting the data for normal values
@@ -67,14 +67,14 @@ export const technicianRegister = asyncHandler(async (req, res) => {
 
         res.status(200).json(new ApiResponse(200,"Name with this business is registered successfully",dbTechnicianCheck))
     }else{
-        res.status(400).json(new ApiError(400,"Name with this business already exists"))
+        return res.status(400).json(new ApiError(400,"Name with this business already exists"))
     }
 });
 
 export const technicianLogin =asyncHandler(async (req,res)=>{
     const {email,password}=req.body
     if(!email || !password){
-        res.status(400).json(new ApiError(400,"Email and password are required"))
+       return  res.status(400).json(new ApiError(400,"Email and password are required"))
     } 
 
     validateEmail(email,res)
@@ -84,7 +84,7 @@ export const technicianLogin =asyncHandler(async (req,res)=>{
 
     const dbUserResult=await db.get(userQuery,[email])
     if(dbUserResult===undefined){
-        res.status(400).json(new ApiError(400,"Business not found"))
+       return  res.status(400).json(new ApiError(400,"Business not found"))
     }else{
         console.log(dbUserResult)
         const hashedPassword=dbUserResult.password
@@ -94,7 +94,7 @@ export const technicianLogin =asyncHandler(async (req,res)=>{
             const jwtToken=jwt.sign(payload,process.env.JWT_SECRET_KEY,{expiresIn:"1d"})
             res.status(200).cookie("jwtToken",jwtToken).json(new ApiResponse(200,"Business logged in successfully",{jwtToken,username:dbUserResult["username"]})) // directly storing in cookies of browser or we can get token from response directly
         }else{
-            res.status(400).json(new ApiError(400,"Invalid password"))
+           return res.status(400).json(new ApiError(400,"Invalid password"))
         }
     }
 })
