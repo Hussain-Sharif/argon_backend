@@ -12,9 +12,12 @@ export const technicianRegister = asyncHandler(async (req, res) => {
     let { city, areas, services } = req.body;
     console.log("In server",  req.body );
 
-    // city = city && city !== "" ? JSON.parse(city) : [];
-    // areas = areas && areas !== "" ? JSON.parse(areas) : [];
-    // services = services && services !== "" ? JSON.parse(services) : [];
+    // If city, areas, and services are coming as comma-separated strings, split them into arrays
+    city = city ? city.split(',') : [];
+    areas = areas ? areas.split(',') : [];
+    services = services ? services.split(',') : [];
+
+    console.log("after array changes in server",  { city, areas, services } );
 
     console.log(req.file);
     const imageLocalPath= req.file?.path
