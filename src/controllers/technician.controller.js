@@ -10,9 +10,10 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 export const technicianRegister = asyncHandler(async (req, res) => {
     const {name,password,email, description,mobile}=req.body
     let {city,areas,services}=req.body // ALL ARE ARRAY OF STRINGS
-    city = JSON.parse(req.body.city);
-    areas = JSON.parse(req.body.areas);
-    services = JSON.parse(req.body.services);
+    console.log("In server",{city,areas,services})
+    city = JSON?.parse(req.body?.city);
+    areas = JSON?.parse(req.body?.areas);
+    services = JSON?.parse(req.body?.services);
     console.log(req.file);
     const imageLocalPath= req.file?.path
     console.log(req.body);
