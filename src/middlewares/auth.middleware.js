@@ -9,12 +9,12 @@ export const verifyToken = asyncHandler(async (req, res, next) => {
         const jwtToken = req.cookies.jwtToken || req.headers["authorization"]?.split(" ")[1];
 
         if(!jwtToken){
-            throw new ApiError(401,"Unauthorized Request")
+            return  res.status(401).json(new ApiError(401,"Unauthorized Request"))
         }
 
         jwt.verify(jwtToken,process.env.JWT_SECRET_KEY,(error,user)=>{
             if(error){
-                throw new ApiError(401,"Unauthorized Request")
+                return  res.status(401).json(new ApiError(401,"Unauthorized Request"))
             }else{
                 next();
             }
@@ -22,6 +22,6 @@ export const verifyToken = asyncHandler(async (req, res, next) => {
 
         
     } catch (error) {
-        throw new  ApiError(401,"Invalid Access Token")
+        return  res.status(401).json(new ApiError(401,"Invalid Access Token"))
     }
 })
