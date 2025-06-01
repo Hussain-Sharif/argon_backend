@@ -9,6 +9,12 @@ app.use(express.urlencoded({extended:true}))
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
 }));
+
+// Optional: Explicit OPTIONS handler if you're not using cors middleware globally
+app.options('*', cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+}));
 app.use(cookieParser());
 
 
