@@ -19,6 +19,10 @@ export const applianceSuggestion=asyncHandler(async (req,res)=>{
 export const createNewAppliance=asyncHandler(async(erq,res)=>{
     let {newAppliance}=req.body 
 
+    if(!newAppliance){
+        return res.status(400).json(new ApiResponse(400,"Appliance name is required"))
+    }
+
     newAppliance=newAppliance.trim()
     newAppliance=newAppliance.toLowerCase()
 
